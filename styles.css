@@ -6,6 +6,16 @@ button, .screen, .header {
     margin: 5px;
 }
 
+.extraBtnContainer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.extraBtnContainer button {
+    font-size: 48px;
+    height: 60px;
+}
+
 .header {
     font-size: 72px;
 }
