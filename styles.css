@@ -1,3 +1,44 @@
 body {
     background-color: rgb(104, 104, 104);
 }
+
+button, .screen, .header {
+    margin: 5px;
+}
+
+.header {
+    font-size: 72px;
+}
+
+.screen {
+    height: 150px;
+    background-color: black;
+}
+
+button {
+    width: 115px;
+    height: 115px;
+    font-size: 48px;
+}
+
+.calcBody {
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.btnContainer {
+    display: flex;
+}
+
+.sideBtnContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainBtnContainer {
+    display: flex;
+    flex-flow: wrap-reverse;
+}
