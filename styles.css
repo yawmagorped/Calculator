@@ -2,7 +2,7 @@ body {
     background-color: rgb(104, 104, 104);
 }
 
-button, .screen, .header {
+button, .display, .header {
     margin: 5px;
 }
 
@@ -20,8 +20,10 @@ button, .screen, .header {
     font-size: 72px;
 }
 
-.screen {
+.display {
     height: 150px;
+    font-size: 120px;
+    color: white;
     background-color: black;
 }
 
