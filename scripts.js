@@ -1,7 +1,7 @@
 function add(a, b) {
     return a + b;
 }
-function substract(a, b) {
+function subtract(a, b) {
     return a - b;
 }
 function multiply(a, b) {
@@ -39,58 +39,87 @@ const display = document.querySelector(".display");
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach(btn => {
-    btn.addEventListener('click', (e) => getInput(e.target.id));
+    btn.addEventListener('click', (e) => processInput(e.target.id));
 });
 
-let firstOperand = null;
-let operator;
-let secondOperand = null;
+let firstOperand = '';
+let operator = '';
+let secondOperand = '';
 let numberStr = '';
+let result = null;
 
-function getInput(id) {
+
+function processInput(id) {
     switch (id) {
         case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '0': case '.':
             addOperator(id);
             break;
         case '+': case '-': case '/': case '*':
+        case '=':
             addOperand(id);
             break;
-        case '=':
-            break;
+        case 'clear':
+            clearLogic();
         break;
     }
 }
 
-function addOperator(id) {
-    if (numberStr.includes('.') && id == '.') return;
-    numberStr += id;
-    display.textContent = numberStr;
-}
-
-function addOperand(id) {
-    operator = id;
-    if(firstOperand == null) {
-        display.textContent = operator;
-        firstOperand = parseFloat(numberStr);
-    }   else {
-        if(numberStr != '')
-            secondOperand = parseFloat(numberStr);
-
-        firstOperand = evaluate(firstOperand, secondOperand, operator);
-        secondOperand = firstOperand;
-        display.textContent = firstOperand;
-    }
+function clearLogic() {
+    firstOperand = '';
+    operator = '';
+    secondOperand = '';
     numberStr = '';
+    result = null;
+    updateDisplay('');
 }
 
+function updateDisplay(str) {
+    display.textContent = str.toString();
+}
+
+function addOperator(num) {
+    if ( !(numberStr.includes('.') && num == '.') ) {
+        numberStr += num;
+        updateDisplay(numberStr);
+    }
+}
+
+function addOperand(op) {
+    if(numberStr != '' && firstOperand == '' || operator == '=') {
+        if(operator != '=')
+            firstOperand = numberStr;
+        numberStr = '';
+        operator = op;
+    } else if(numberStr != '' && firstOperand != '' && operator != '') {
+        secondOperand = numberStr;
+        numberStr = '';
+        result = evaluate(firstOperand, secondOperand, operator);
+        updateDisplay(result);
+
+        operator = op;
+        firstOperand = result;
+        secondOperand = '';
+    } else if(numberStr == '' && firstOperand != '' && operator != '') {
+        result = evaluate(firstOperand, firstOperand, operator);
+        updateDisplay(result);
+        operator = op;
+        firstOperand = result;
+    } else if (op == '=') {
+        if(numberStr == '' && firstOperand != '' && operator != '') {
+
+        }
+    }
+}
 
 function evaluate(a, b, op) {
+    a = parseFloat(a);
+    b = parseFloat(b);
     switch (op) {
         case '+':
             return add(a, b);
             break;
         case '-':
-            return substract(a, b);
+            return subtract(a, b);
             break;
         case '*':
             return multiply(a, b);
