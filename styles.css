@@ -34,6 +34,9 @@ button {
 }
 
 .calcBody {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(56, 56, 56);
     width: 500px;
     margin: 0 auto;
     display: flex;

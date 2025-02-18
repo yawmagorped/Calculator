@@ -82,12 +82,17 @@ function addOperator(num) {
         numberStr += num;
         updateDisplay(numberStr);
     }
+    if(operator == '/' && numberStr == '0') {
+        updateDisplay("OwOstop");
+        display.style.backgroundColor = "red";
+    }
 }
 
 function addOperand(op) {
     if(numberStr != '' && firstOperand == '' || operator == '=') {
-        if(operator != '=')
+        if(operator != '=') {
             firstOperand = numberStr;
+        }
         numberStr = '';
         operator = op;
     } else if(numberStr != '' && firstOperand != '' && operator != '') {
@@ -104,12 +109,9 @@ function addOperand(op) {
         updateDisplay(result);
         operator = op;
         firstOperand = result;
-    } else if (op == '=') {
-        if(numberStr == '' && firstOperand != '' && operator != '') {
-
-        }
     }
 }
+
 
 function evaluate(a, b, op) {
     a = parseFloat(a);
