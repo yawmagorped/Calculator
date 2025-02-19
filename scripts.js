@@ -89,6 +89,9 @@ function addOperator(num) {
 }
 
 function addOperand(op) {
+    if(operator == '=' && op == '=')
+        return;
+
     if(numberStr != '' && firstOperand == '' || operator == '=') {
         if(operator != '=') {
             firstOperand = numberStr;
